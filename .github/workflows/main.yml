@@ -17,18 +17,12 @@ jobs:
         id: install-node
         uses: actions/setup-node@v4
         with:
-          node-version-file: package.json
-
-      - name: Install npm
-        id: install-npm
-        uses: npm/setup-node@v4
-        with:
-          node-version-file: 8
+          node-version: 20
+          cache: npm
 
       - name: Install dependencies
         id: install-dependencies
-        run: |
-         npm install
+        run: npm ci
 
       - name: Configure AWS credentials
         id: configure-aws-credentials
@@ -36,4 +30,4 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: us-east-2
